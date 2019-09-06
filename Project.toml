@@ -1,0 +1,10 @@
+name = "Expect"
+uuid = "e89069d2-d039-11e9-2b56-0f1b8cba53da"
+repo = "https://github.com/PerezHz/Expect.jl.git"
+version = "0.1.0"
+
+[compat]
+julia = "≥ 1.0.0"
+
+[targets]
+test = ["Test"]

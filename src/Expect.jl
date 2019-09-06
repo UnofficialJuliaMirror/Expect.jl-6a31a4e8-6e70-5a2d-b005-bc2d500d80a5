@@ -72,14 +72,6 @@ function raw!(proc::ExpectProc, raw::Bool)
         # pipes are always raw
         return raw
     else
-        @static if VERSION < v"0.7"
-            # libuv keeps an internal "mode" state which prevents us to call
-            # cfmakeraw() again, even if the connected slave changed the discipline
-            # on our back. Work this around by toggling the mode twice.
-            # See: https://github.com/libuv/libuv/issues/1292
-            # TODO: determine valid VERSION when fix gets merged
-            raw!(proc.out_stream, !raw)
-        end
         raw!(proc.out_stream, raw)
     end
 end

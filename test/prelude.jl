@@ -1,6 +1,5 @@
 using Expect
 using Test
-using Compat: readline
 
 # like @test, but stops execution of the testset
 macro require(expr)
