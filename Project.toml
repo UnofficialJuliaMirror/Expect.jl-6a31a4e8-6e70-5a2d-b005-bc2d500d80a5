@@ -1,5 +1,5 @@
 name = "Expect"
-uuid = "e89069d2-d039-11e9-2b56-0f1b8cba53da"
+uuid = "6a31a4e8-6e70-5a2d-b005-bc2d500d80a5"
 repo = "https://github.com/PerezHz/Expect.jl.git"
 version = "0.1.0"
 
