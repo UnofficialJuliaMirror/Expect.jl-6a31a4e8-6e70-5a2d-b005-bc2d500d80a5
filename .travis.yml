@@ -5,11 +5,5 @@ os:
   - osx
 julia:
   - 1.0
-  - 1.1
-  - 1.2
-  - nightly
-matrix:
-  allow_failures:
-  - julia: nightly
 after_success:
    - if [ "$TRAVIS_JULIA_VERSION" = "nightly" ]; then julia -e "cd(Pkg.dir(\"${JL_PKG}\")); Pkg.add(\"Coverage\"); using Coverage; Coveralls.submit(Coveralls.process_folder())"; fi
