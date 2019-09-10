@@ -1,4 +1,4 @@
-# This script has been adapted from # https://gitlab.com/tkpapp/GitlabJuliaDemo.jl/blob/master/.gitlab-ci.yml
+# This script has been adapted from https://gitlab.com/tkpapp/GitlabJuliaDemo.jl/blob/master/.gitlab-ci.yml
 image: julia:1.0                # image comes from Docker hub
 
 before_script:
@@ -23,3 +23,6 @@ default:
 #       - public
 #   only:
 #   - master
+
+after_script:
+  - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit_local(process_folder())'
