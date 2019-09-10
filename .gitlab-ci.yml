@@ -38,10 +38,10 @@ osx:
   before_script:
     # workaround for https://github.com/JuliaDocs/Documenter.jl/issues/686
     # - apt-get -qq update; apt-get -y install git; apt-get -y install make; apt-get -y install gcc
-    - julia --project=@. -e "import Pkg; Pkg.build()"
+    - julia1.0 --project=@. -e "import Pkg; Pkg.build()"
   script:
-    - julia --project=@. -e "import Pkg; Pkg.test(; coverage = true)"
+    - julia1.0 --project=@. -e "import Pkg; Pkg.test(; coverage = true)"
   after_script:
-    - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit_local(process_folder())'
+    - julia1.0 -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit_local(process_folder())'
   tags:
     - osx
