@@ -5,7 +5,12 @@ export ExpectTimeout, ExpectEOF
 
 ## Imports
 import Base.Libc: strerror
-import Base: Process, TTY, wait, wait_readnb, wait_readbyte
+import Base: Process, TTY, wait, wait_readnb
+if VERSION ≤ v"1.3.0-rc1.0"
+    import Base.wait_readbyte
+else
+    import Base.wait_close
+end
 import Base: kill, process_running, process_exited, success
 import Base: write, print, println, flush, eof, close
 import Base: read, readbytes!, readuntil
@@ -201,9 +206,17 @@ function wait_readnb(proc::ExpectProc, nb::Int; timeout::Real=proc.timeout)
     end
 end
 
-function wait_readbyte(proc::ExpectProc, c::UInt8; timeout::Real=proc.timeout)
-    _timed_wait(proc; timeout=timeout) do
-        wait_readbyte(proc.in_stream, c)
+if VERSION ≤ v"1.3.0-rc1.0"
+    function wait_readbyte(proc::ExpectProc, c::UInt8; timeout::Real=proc.timeout)
+        _timed_wait(proc; timeout=timeout) do
+            wait_readbyte(proc.in_stream, c)
+        end
+    end
+else
+    function wait_close(proc::ExpectProc; timeout::Real=proc.timeout)
+        _timed_wait(proc; timeout=timeout) do
+            wait_close(proc.in_stream)
+        end
     end
 end
 
