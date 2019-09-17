@@ -88,7 +88,11 @@ function _spawn(cmd::Cmd, env::Base.EnvDict, pty::Bool)
 
         fdm = RawFD(ccall(:posix_openpt, Cint, (Cint,), O_RDWR|O_NOCTTY))
         fdm == RawFD(-1) && error("openpt failed: $(strerror())")
-        ttym = TTY(fdm)
+        if VERSION ≤ v"1.1.0"
+            ttym = TTY(fdm; readable=true)
+        else
+            ttym = TTY(fdm)
+        end
         in_stream = out_stream = ttym
 
         rc = _set_cloexec(fdm)
