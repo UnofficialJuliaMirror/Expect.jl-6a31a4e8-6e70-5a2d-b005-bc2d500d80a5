@@ -6,11 +6,10 @@ Julia 1.0:
     # workaround for https://github.com/JuliaDocs/Documenter.jl/issues/686
     - apt-get -qq update; apt-get -y install git; apt-get -y install make; apt-get -y install gcc
     - julia --project=@. -e "import Pkg; Pkg.build()"
-  default:
-    script:
-      - julia --project=@. -e "import Pkg; Pkg.test(; coverage = true)"
-      - julia --project=test/coverage -e 'import Pkg; Pkg.instantiate()'
-      - julia --project=test/coverage test/coverage/coverage-summary.jl
+  script:
+    - julia --project=@. -e "import Pkg; Pkg.test(; coverage = true)"
+    - julia --project=test/coverage -e 'import Pkg; Pkg.instantiate()'
+    - julia --project=test/coverage test/coverage/coverage-summary.jl
   tags:
     - linux
   # pages:
@@ -31,11 +30,10 @@ Julia 1.2:
     # workaround for https://github.com/JuliaDocs/Documenter.jl/issues/686
     - apt-get -qq update; apt-get -y install git; apt-get -y install make; apt-get -y install gcc
     - julia --project=@. -e "import Pkg; Pkg.build()"
-  default:
-    script:
-      - julia --project=@. -e "import Pkg; Pkg.test(; coverage = true)"
-      - julia --project=test/coverage -e 'import Pkg; Pkg.instantiate()'
-      - julia --project=test/coverage test/coverage/coverage-summary.jl
+  script:
+    - julia --project=@. -e "import Pkg; Pkg.test(; coverage = true)"
+    - julia --project=test/coverage -e 'import Pkg; Pkg.instantiate()'
+    - julia --project=test/coverage test/coverage/coverage-summary.jl
   tags:
     - linux
   # pages:
